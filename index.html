@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <!-- 字符编码：UTF-8，确保中文正常显示 -->
+    <meta charset="UTF-8">
+    <!-- 视口设置：让页面在移动设备上也能自适应缩放 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 页面标题 -->
+    <title>个人名片 / Personal Card</title>
+    <!-- 外链独立样式文件：HTML 结构与 CSS 样式分离书写 -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- ============ 名片卡片主体 ============ -->
+    <main class="card">
+
+        <!-- 头像区域：使用本地图片 avatar.jpg
+             提示：将头像图片命名为 avatar.jpg 放入本目录即可显示；
+             图片未放置前，自动显示下方带首字母的"张"字占位圆（纯 CSS 实现） -->
+        <div class="avatar-wrap">
+            <!-- 占位圆：压在 img 下层，图片加载成功后会被 img 完全遮住 -->
+            <div class="avatar-fallback" aria-hidden="true">张</div>
+            <img class="avatar" src="avatar.jpg" alt="头像：张三">
+        </div>
+
+        <!-- 个人信息区域 -->
+        <div class="info">
+            <!-- 姓名 -->
+            <h1 class="name">张三</h1>
+            <!-- 职位 -->
+            <p class="title">前端开发工程师 / Front-end Developer</p>
+        </div>
+
+        <!-- 联系方式区域：使用 <address> 语义化标签包裹 -->
+        <address class="contact">
+            <p class="contact-item">
+                <span class="icon" aria-hidden="true">&#9742;</span><!-- 电话图标（Unicode） -->
+                <a href="tel:+8613800000000">+86 138 0000 0000</a>
+            </p>
+            <p class="contact-item">
+                <span class="icon" aria-hidden="true">&#9993;</span><!-- 邮箱图标（Unicode） -->
+                <a href="mailto:zhangsan@example.com">zhangsan@example.com</a>
+            </p>
+        </address>
+
+        <!-- 底部座右铭：增加一点个性与简约感 -->
+        <p class="motto">简单 · 专注 · 高效</p>
+
+    </main>
+
+</body>
+</html>

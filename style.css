@@ -1,0 +1,177 @@
+/* =========================================================
+   简约风格个人名片 —— 样式表
+   全部样式与 HTML 结构分离，便于维护与复用
+   ========================================================= */
+
+/* ---------- 基础重置：清除默认外边距，统一盒模型 ---------- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* ---------- 全局基础样式 ---------- */
+html {
+    /* 防止移动端点击/双击出现蓝色高亮，并保证字体渲染平滑 */
+    -webkit-tap-highlight-color: transparent;
+}
+
+body {
+    /* 1) 页面居中：Flexbox 让卡片在水平与垂直方向都居中 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* 视口最小高度：保证卡片内容完整可见 */
+    min-height: 100vh;
+
+    /* 2) 简约背景：柔和的浅灰蓝渐变，视觉干净舒适 */
+    background: linear-gradient(135deg, #f4f7fb 0%, #e8eef5 100%);
+
+    /* 3) 字体：优先系统无衬线字体，中文回退到雅黑/苹方，保证简体显示清晰 */
+    font-family: "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+    color: #333;
+}
+
+/* ---------- 名片卡片 ---------- */
+.card {
+    /* 卡片宽度：手机上适中，桌面居中观感也合适 */
+    width: 340px;
+    /* 背景与文字配色：白色卡片 + 深灰蓝文字，简约有层次 */
+    background: #ffffff;
+    color: #2c3e50;
+
+    /* 关键需求 1：12px 圆角 */
+    border-radius: 12px;
+
+    /* 关键需求 2：柔和阴影 —— 双层制造"轻浮"效果，
+       外层大而淡（弥散感），内层小而深（贴近感） */
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.10),
+                0 2px 6px rgba(0, 0, 0, 0.06);
+
+    /* 关键需求 3：悬停过渡动画 —— 对位移与阴影同时做 0.3s 缓动 */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+    /* 卡片内垂直排布，留出舒适内边距 */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 32px 28px 24px;
+
+    /* 卡片内外都预留空间，避免贴边 */
+    max-width: calc(100% - 48px);
+    margin: 24px auto;
+}
+
+/* ---------- 悬停上浮动画：卡片整体上移 8px，阴影同步加深 ---------- */
+.card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 18px 36px rgba(0, 0, 0, 0.16),
+                0 4px 10px rgba(0, 0, 0, 0.08);
+}
+
+/* ---------- 头像 ---------- */
+.avatar-wrap {
+    margin-bottom: 20px;
+    /* 定位基准：让占位圆与头像图片在同一个层叠上下文内对齐 */
+    position: relative;
+}
+
+/* 头像占位圆：仅当 avatar.jpg 缺失时可见（被 img 完全遮挡） */
+.avatar-fallback {
+    /* 与头像同尺寸的圆 */
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    /* 浅色底 + 品牌蓝灰首字母，简约美观 */
+    background: #e3e9f2;
+    color: #5c7ea6;
+    font-size: 44px;
+    font-weight: 600;
+    /* 文字水平垂直居中 */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* 定位到头像区域，z-index 低于 img，图片加载后自然被覆盖 */
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+}
+
+.avatar {
+    /* 圆形头像：宽高相等 + 50% 圆角 */
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    /* 白色描边圈，让头像与卡片之间产生清晰分隔 */
+    border: 3px solid #ffffff;
+    /* 头像在移动端也居中不溢出 */
+    max-width: 100%;
+    /* 保证 object-fit 裁剪，防止图片被拉伸变形 */
+    object-fit: cover;
+
+    /* 层叠顺序：图片必须压在占位圆（z-index: 0）之上 */
+    position: relative;
+    z-index: 1;
+
+    /* 头像悬停时轻微放大，与卡片上浮形成呼应（0.3s 同步） */
+    transition: transform 0.3s ease;
+}
+.card:hover .avatar {
+    transform: scale(1.06);
+}
+
+/* ---------- 姓名 ---------- */
+.name {
+    font-size: 26px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    color: #223344;
+    margin-bottom: 6px;
+}
+
+/* ---------- 职位 ---------- */
+.title {
+    font-size: 14px;
+    font-weight: 400;
+    color: #7f8fa6; /* 比姓名浅一档，突出层级 */
+    margin-bottom: 20px;
+}
+
+/* ---------- 联系方式（<address>） ---------- */
+.contact {
+    display: flex;
+    flex-direction: column;
+    gap: 8px; /* 两个联系条目之间留出均匀间距 */
+    align-items: center;
+}
+
+.contact-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px; /* 图标与文字间距 */
+    font-size: 14px;
+    color: #4a5b6e;
+}
+
+.icon {
+    font-size: 16px;
+    color: #5c7ea6; /* 图标统一使用品牌蓝灰，简洁不刺眼 */
+}
+
+/* 联系方式链接：去掉下划线，保持简约，悬停时变色反馈 */
+.contact-item a {
+    text-decoration: none;
+    color: #4a5b6e;
+    transition: color 0.2s ease;
+}
+.contact-item a:hover {
+    color: #2c6f9e;
+}
+
+/* ---------- 底部座右铭 ---------- */
+.motto {
+    margin-top: 20px;
+    font-size: 12px;
+    letter-spacing: 2px;
+    color: #a9b6c7; /* 弱化存在感，仅作点缀 */
+}
