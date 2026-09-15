@@ -55,7 +55,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 32px 28px 24px;
+    padding: 32px 32px 24px;
 
     /* 卡片内外都预留空间，避免贴边 */
     max-width: calc(100% - 48px);
@@ -126,7 +126,7 @@ body {
     font-weight: 600;
     letter-spacing: 1px;
     color: #223344;
-    margin-bottom: 6px;
+    margin-bottom: 8px;
 }
 
 /* ---------- 职位 ---------- */
